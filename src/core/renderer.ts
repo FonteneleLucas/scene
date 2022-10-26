@@ -18,6 +18,7 @@ document.body.appendChild(renderer.domElement)
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = PCFShadowMap
 renderer.physicallyCorrectLights = true
+renderer.setClearColor( 351896, 0.8 ); // second param is opacity, 0 => transparent
 
 renderer.toneMappingExposure = 1
 
