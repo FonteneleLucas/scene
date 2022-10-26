@@ -60,6 +60,25 @@ const sphere = new Mesh(
 const z_axis = new SimpleBlock(-9,0.5,-9,2,1);
 z_axis.renderBaseArea(planeFactorX, planeFactorZ)
 
+const bamboo = new SimpleBlock(-10,2,2,3,2);
+scene.add(bamboo.get())
+
+const cloud1 = new SimpleBlock(4, 8, 2, 0, 1);
+cloud1.cloud()
+
+const cloud2 = new SimpleBlock(-8, 7, -6, 0, 1);
+cloud2.cloud()
+
+const cloud3 = new SimpleBlock(-10, 7.2, -6, 0, 2);
+cloud3.cloud()
+
+const cloud4 = new SimpleBlock(2, 7, -6, 0, 1);
+cloud4.cloud()
+
+const cloud5 = new SimpleBlock(7, 7.2, -6, 0, 2);
+cloud5.cloud()
+
+
 // for (let index = -9; index <= 9; index+=2) {
 //   const cube1 = new SimpleBlock(-9,0.5,index,2,1);
 //   scene.add(cube1.render())

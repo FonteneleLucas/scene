@@ -1,4 +1,4 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial, TextureLoader } from "three";
+import { BoxGeometry, Color, Mesh, MeshBasicMaterial, TextureLoader } from "three";
 import { scene } from "../scene/scene";
 
 
@@ -9,6 +9,10 @@ class SimpleBlock {
     private z: number;
     private textureType: number;
     private height: number;
+
+    private x_rotate: number;
+    private y_rotate: number;
+    private z_rotate: number;
     
     constructor(x: number, y: number, z: number, textureType: number, height: number) {
       this.x = x;
@@ -16,6 +20,15 @@ class SimpleBlock {
       this.z = z;
       this.textureType = textureType;
       this.height = height
+      this.x_rotate = 0;
+      this.y_rotate = 0;
+      this.z_rotate = 0;
+    }
+
+    public rotate(x: number, y: number, z: number){
+        this.x_rotate = x;
+        this.y_rotate = y;
+        this.z_rotate = z;
     }
 
     private defineTexture(){
@@ -25,23 +38,31 @@ class SimpleBlock {
         }else if (this.textureType === 2) {
             path+="grama.png"
         }
+        else if (this.textureType === 3) {
+            path+="bamboo.png"
+        }else{
+            path+="cloud.png"
+        }
         
         const texture = new TextureLoader().load( path );
         return texture;
     }
 
-    public render() {
+    public get() {
         const cube = new Mesh( 
             new BoxGeometry(2,this.height,2,2), 
-            new MeshBasicMaterial({ map: this.defineTexture() }));
+            new MeshBasicMaterial({color: "#FFF", map: this.defineTexture()}));
         cube.position.set(this.x, this.y, this.z)
+        cube.rotateX(this.x_rotate)
+        cube.rotateY(this.y_rotate)
+        cube.rotateZ(this.z_rotate)
         return cube;
     }
 
     public renderLineZ(limite: number, marginLeft:number){
         for (let index = -limite; index <= limite; index+=2) {
             const cube1 = new SimpleBlock(marginLeft,0.5,index,2,1);
-            scene.add(cube1.render())
+            scene.add(cube1.get())
         }
     }
 
@@ -55,6 +76,15 @@ class SimpleBlock {
 
     public renderBaseArea(planeFactorX: number, planeFactorZ: number){
         this.renderLineX(planeFactorX, planeFactorZ)
+    }
+
+    public cloud(){
+        for (let index = 0; index < 3; index++) {
+            const nuvem = new SimpleBlock(this.x+4,this.y+2,this.z+4, this.textureType, this.height);
+            nuvem.rotate(50, 0, 0)
+            scene.add(nuvem.get())
+        }
+        
     }
 
     
