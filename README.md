@@ -1,4 +1,4 @@
-<h1 align="center"> Scene WebGL com Three.js</h1>
+<h1 align="center"> Simple Minecraft - Scene WebGL com Three.js</h1>
 
 <p align="center">
 Este projeto foi construído para fundamentar conceitos da disciplina de Computação Gráfica de forma prática.
@@ -17,7 +17,7 @@ Este projeto foi construído para fundamentar conceitos da disciplina de Computa
 <br>
 
 <p align="center">
-  <img alt="scene" src=".github/project.png" width="100%">
+  <img alt="scene" src=".github/result.png" width="100%">
 </p>
 
 Live demo: [https://scene.danilob.com.br](https://scene.danilob.com.br/)
@@ -54,4 +54,4 @@ Esse projeto está sob a licença MIT.
 
 ---
 
-Feito com ♥ by Danilo Borges da Silva
+Feito com ♥ by Lucas Fontenele & Gregorio
