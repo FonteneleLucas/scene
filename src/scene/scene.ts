@@ -1,25 +1,22 @@
 
 
-import THREE, {
+import {
   Scene,
   AxesHelper,
   AmbientLight,
   DirectionalLight,
   Mesh,
-  SphereGeometry,
   MeshToonMaterial,
   PlaneGeometry,
   Color,
   TextureLoader,
-  BoxGeometry,
-  MeshBasicMaterial
 } from "three"
-import { renderer, updateRenderer } from "/src/core/renderer"
 
-import { gui } from "/src/core/gui"
+
 import SimpleBlock from "../components/SimpleBlock"
-import steve from "../components/Steve"
 import Steve from "../components/Steve"
+import { gui } from "../core/gui"
+import { updateRenderer } from "../core/renderer"
 
 export const scene = new Scene()
 

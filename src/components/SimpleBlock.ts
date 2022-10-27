@@ -1,4 +1,4 @@
-import { BoxGeometry, Color, Mesh, MeshBasicMaterial, TextureLoader } from "three";
+import { BoxGeometry, Mesh, MeshBasicMaterial, TextureLoader } from "three";
 import { scene } from "../scene/scene";
 
 
