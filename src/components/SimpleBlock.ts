@@ -37,9 +37,16 @@ class SimpleBlock {
             path+="block.png"
         }else if (this.textureType === 2) {
             path+="grama.png"
-        }
-        else if (this.textureType === 3) {
+        }else if (this.textureType === 3) {
             path+="bamboo.png"
+        }else if(this.textureType === 4) {
+            path+="brow.png"
+        }else if(this.textureType === 5) {
+            path+="sapato.png"
+        }else if(this.textureType === 6) {
+            path+="camisa.png"
+        }else if(this.textureType === 7) {
+            path+="calca.png"
         }else{
             path+="cloud.png"
         }
@@ -85,6 +92,23 @@ class SimpleBlock {
             scene.add(nuvem.get())
         }
         
+    }
+
+    public clouds(){
+        const cloud1 = new SimpleBlock(4, 10, 2, 0, 1);
+        cloud1.cloud()
+
+        const cloud2 = new SimpleBlock(-8, 9, -6, 0, 1);
+        cloud2.cloud()
+
+        const cloud3 = new SimpleBlock(-10, 9, -6, 0, 2);
+        cloud3.cloud()
+
+        const cloud4 = new SimpleBlock(2, 10, -6, 0, 1);
+        cloud4.cloud()
+
+        const cloud5 = new SimpleBlock(7, 9.5, -6, 0, 2);
+        cloud5.cloud()
     }
 
     

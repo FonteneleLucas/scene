@@ -10,12 +10,16 @@ import THREE, {
   MeshToonMaterial,
   PlaneGeometry,
   Color,
-  TextureLoader
+  TextureLoader,
+  BoxGeometry,
+  MeshBasicMaterial
 } from "three"
 import { renderer, updateRenderer } from "/src/core/renderer"
 
 import { gui } from "/src/core/gui"
 import SimpleBlock from "../components/SimpleBlock"
+import steve from "../components/Steve"
+import Steve from "../components/Steve"
 
 export const scene = new Scene()
 
@@ -45,102 +49,21 @@ directionalLight.position.set(0.25, 2, 2.25)
 
 scene.add(directionalLight)
 
-const PARAMS = {
-  color: "#5EDCAE",
-}
-
-const sphere = new Mesh(
-  new SphereGeometry(0.75, 32, 32),
-  new MeshToonMaterial({
-    color: new Color(PARAMS.color),
-    wireframe: false,
-  })
-)
-
+//Renderiza o terreno do ambiente
 const z_axis = new SimpleBlock(-9,0.5,-9,2,1);
 z_axis.renderBaseArea(planeFactorX, planeFactorZ)
 
+//renderiza bloco bamboo
 const bamboo = new SimpleBlock(-10,2,2,3,2);
 scene.add(bamboo.get())
 
-const cloud1 = new SimpleBlock(4, 8, 2, 0, 1);
-cloud1.cloud()
+//renderiza as nuvens
+const defaultBlock = new SimpleBlock(0,0,0,0,0);
+defaultBlock.clouds()
 
-const cloud2 = new SimpleBlock(-8, 7, -6, 0, 1);
-cloud2.cloud()
-
-const cloud3 = new SimpleBlock(-10, 7.2, -6, 0, 2);
-cloud3.cloud()
-
-const cloud4 = new SimpleBlock(2, 7, -6, 0, 1);
-cloud4.cloud()
-
-const cloud5 = new SimpleBlock(7, 7.2, -6, 0, 2);
-cloud5.cloud()
-
-
-// for (let index = -9; index <= 9; index+=2) {
-//   const cube1 = new SimpleBlock(-9,0.5,index,2,1);
-//   scene.add(cube1.render())
-  
-// }
-
-
-// const cube2 = new SimpleBlock(-9,0.5,7,2,1);
-// scene.add(cube2.render())
-// const cube3 = new SimpleBlock(-9,0.5,5,2,1);
-// scene.add(cube3.render())
-// const cube4 = new SimpleBlock(-9,0.5,3,2,1);
-// scene.add(cube4.render())
-// const cube5 = new SimpleBlock(-9,0.5,1,2,1);
-// scene.add(cube5.render())
-// const cube6 = new SimpleBlock(-9,0.5,-1,2,1);
-// scene.add(cube6.render())
-// const cube7 = new SimpleBlock(-9,0.5,-3,2,1);
-// scene.add(cube7.render())
-// const cube8 = new SimpleBlock(-9,0.5,-5,2,1);
-// scene.add(cube8.render())
-// const cube9 = new SimpleBlock(-9,0.5,-7,2,1);
-// scene.add(cube9.render())
-// const cube10 = new SimpleBlock(-9,0.5,-9,2,1);
-// scene.add(cube10.render())
-
-
-sphere.position.set(0, 2, 0)
-sphere.castShadow = true
-
-const sphereCtrls = gui.addFolder({
-  title: "Sphere",
-})
-
-sphereCtrls.addInput(sphere.position, "x", {
-  label: "pos x",
-  min: -10,
-  max: 10,
-  step: 0.1,
-})
-sphereCtrls.addInput(sphere.position, "y", {
-  label: "pos y",
-  min: -10,
-  max: 10,
-  step: 0.1,
-})
-sphereCtrls.addInput(sphere.position, "z", {
-  label: "pos z",
-  min: -10,
-  max: 10,
-  step: 0.1,
-})
-sphereCtrls.addInput(PARAMS, "color").on("change", (e) => {
-  sphere.material.color = new Color(e.value)
-})
-
-sphereCtrls.addInput(sphere.material, "wireframe")
-
-// scene.add(sphere)
-
-
-
+//renderiza Steve
+const steve = new Steve();
+steve.get()
 
 const plane = new Mesh(
   new PlaneGeometry(planeFactorX, planeFactorZ),
