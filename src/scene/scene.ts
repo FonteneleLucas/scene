@@ -34,7 +34,7 @@ gui.addInput(axesHelper, "visible", {
 const ambientLight = new AmbientLight(0xffffff, 0.9)
 scene.add(ambientLight)
 
-scene.background = new TextureLoader().load( 'src/resources/sky.jpeg' );
+scene.background = new TextureLoader().load( '/assets/resources/sky.jpeg' );
 
 
 const directionalLight = new DirectionalLight("#ffffff", 2)

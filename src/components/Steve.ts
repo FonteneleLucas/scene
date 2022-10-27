@@ -35,12 +35,12 @@ class Steve {
         scene.add(mao2.get())
     
         const cubeMaterials = [
-        new MeshBasicMaterial({ map: new TextureLoader().load('src/resources/steveside.png') }), //right side
-        new MeshBasicMaterial({ map: new TextureLoader().load('src/resources/steveleft.png') }), //left side
-        new MeshBasicMaterial({ map: new TextureLoader().load('src/resources/stevetop.png') }),  //top side
-        new MeshBasicMaterial({ map: new TextureLoader().load('src/resources/steveside.png') }), //bottom side
-        new MeshBasicMaterial({ map: new TextureLoader().load('src/resources/stevefront.png') }),//front side
-        new MeshBasicMaterial({ map: new TextureLoader().load('src/resources/stevetop.png') }),  //back side
+        new MeshBasicMaterial({ map: new TextureLoader().load('/assets/resources/steveside.png') }), //right side
+        new MeshBasicMaterial({ map: new TextureLoader().load('/assets/resources/steveleft.png') }), //left side
+        new MeshBasicMaterial({ map: new TextureLoader().load('/assets/resources/stevetop.png') }),  //top side
+        new MeshBasicMaterial({ map: new TextureLoader().load('/assets/resources/steveside.png') }), //bottom side
+        new MeshBasicMaterial({ map: new TextureLoader().load('/assets/resources/stevefront.png') }),//front side
+        new MeshBasicMaterial({ map: new TextureLoader().load('/assets/resources/stevetop.png') }),  //back side
         ];
     
         const steve = new Mesh(new BoxGeometry(2,2,2,2), cubeMaterials);

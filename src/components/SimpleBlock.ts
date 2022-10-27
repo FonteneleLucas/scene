@@ -32,7 +32,7 @@ class SimpleBlock {
     }
 
     private defineTexture(){
-        var path = "src/resources/"
+        var path = "/assets/resources/"
         if (this.textureType === 1){
             path+="block.png"
         }else if (this.textureType === 2) {
