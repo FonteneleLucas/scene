@@ -20,7 +20,7 @@ Este projeto foi construído para fundamentar conceitos da disciplina de Computa
   <img alt="scene" src=".github/result.png" width="100%">
 </p>
 
-Live demo: [https://scene.danilob.com.br](https://scene.danilob.com.br/)
+Live demo: [https://scene-minecraft.vercel.app/](https://scene-minecraft.vercel.app/)
 
 ## 🚀 Tecnologias
 
