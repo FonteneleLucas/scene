@@ -3,18 +3,21 @@ import { scene } from "../scene/scene";
 
 
 
+
+
+
 class SimpleBlock {
     private x: number;
     private y: number;
     private z: number;
-    private textureType: number;
+    private textureType: 'pedra'|'block'|'grama' |'bamboo'| 'brow'| 'sapato'| 'calca'|'camisa'|'cloud';
     private height: number;
 
     private x_rotate: number;
     private y_rotate: number;
     private z_rotate: number;
     
-    constructor(x: number, y: number, z: number, textureType: number, height: number) {
+    constructor(x: number, y: number, z: number, textureType:  'pedra'|'block'|'grama' |'bamboo'| 'brow'| 'sapato'| 'calca'|'camisa'|'cloud', height: number) {
       this.x = x;
       this.y = y;
       this.z = z;
@@ -33,23 +36,24 @@ class SimpleBlock {
 
     private defineTexture(){
         var path = "/assets/resources/"
-        if (this.textureType === 1){
-            path+="block.png"
-        }else if (this.textureType === 2) {
-            path+="grama.png"
-        }else if (this.textureType === 3) {
-            path+="bamboo.png"
-        }else if(this.textureType === 4) {
-            path+="brow.png"
-        }else if(this.textureType === 5) {
-            path+="sapato.png"
-        }else if(this.textureType === 6) {
-            path+="camisa.png"
-        }else if(this.textureType === 7) {
-            path+="calca.png"
-        }else{
-            path+="cloud.png"
-        }
+        path+=`${this.textureType}.png`
+        // if (this.textureType === 1){
+        //     path+="block.png"
+        // }else if (this.textureType === 2) {
+        //     path+="grama.png"
+        // }else if (this.textureType === 3) {
+        //     path+="bamboo.png"
+        // }else if(this.textureType === 4) {
+        //     path+="brow.png"
+        // }else if(this.textureType === 5) {
+        //     path+="sapato.png"
+        // }else if(this.textureType === 6) {
+        //     path+="camisa.png"
+        // }else if(this.textureType === 7) {
+        //     path+="calca.png"
+        // }else{
+        //     path+="cloud.png"
+        // }
         
         const texture = new TextureLoader().load( path );
         return texture;
@@ -68,7 +72,7 @@ class SimpleBlock {
 
     public renderLineZ(limite: number, marginLeft:number){
         for (let index = -limite; index <= limite; index+=2) {
-            const cube1 = new SimpleBlock(marginLeft,0.5,index,2,1);
+            const cube1 = new SimpleBlock(marginLeft,0.5,index,'grama',1);
             scene.add(cube1.get())
         }
     }
@@ -95,19 +99,19 @@ class SimpleBlock {
     }
 
     public clouds(){
-        const cloud1 = new SimpleBlock(4, 10, 2, 0, 1);
+        const cloud1 = new SimpleBlock(4, 10, 2, 'cloud', 1);
         cloud1.cloud()
 
-        const cloud2 = new SimpleBlock(-8, 9, -6, 0, 1);
+        const cloud2 = new SimpleBlock(-8, 9, -6,'cloud', 1);
         cloud2.cloud()
 
-        const cloud3 = new SimpleBlock(-10, 9, -6, 0, 2);
+        const cloud3 = new SimpleBlock(-10, 9, -6, 'cloud', 2);
         cloud3.cloud()
 
-        const cloud4 = new SimpleBlock(2, 10, -6, 0, 1);
+        const cloud4 = new SimpleBlock(2, 10, -6, 'cloud', 1);
         cloud4.cloud()
 
-        const cloud5 = new SimpleBlock(7, 9.5, -6, 0, 2);
+        const cloud5 = new SimpleBlock(7, 9.5, -6, 'cloud', 2);
         cloud5.cloud()
     }
 

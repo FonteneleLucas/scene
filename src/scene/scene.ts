@@ -11,6 +11,7 @@ import {
   Color,
   TextureLoader,
 } from "three"
+import Home from "../components/Cadeira"
 
 
 import SimpleBlock from "../components/SimpleBlock"
@@ -20,8 +21,8 @@ import { updateRenderer } from "../core/renderer"
 
 export const scene = new Scene()
 
-const planeFactorX = 20;
-const planeFactorZ = 20;
+const planeFactorX = 40;
+const planeFactorZ = 40;
 
 // Axes Helper
 const axesHelper = new AxesHelper(0.5)
@@ -47,20 +48,25 @@ directionalLight.position.set(0.25, 2, 2.25)
 scene.add(directionalLight)
 
 //Renderiza o terreno do ambiente
-const z_axis = new SimpleBlock(-9,0.5,-9,2,1);
+const z_axis = new SimpleBlock(-9,0.5,-9,'grama',1);
 z_axis.renderBaseArea(planeFactorX, planeFactorZ)
 
 //renderiza bloco bamboo
-const bamboo = new SimpleBlock(-10,2,2,3,2);
+const bamboo = new SimpleBlock(-10,2,2,'bamboo',2);
 scene.add(bamboo.get())
 
 //renderiza as nuvens
-const defaultBlock = new SimpleBlock(0,0,0,0,0);
+const defaultBlock = new SimpleBlock(0,0,0,'cloud',0);
 defaultBlock.clouds()
 
 //renderiza Steve
-const steve = new Steve();
+const steve = new Steve(2,0,-8);
 steve.get()
+
+
+//renderiza home
+const home = new Home();
+home.get()
 
 const plane = new Mesh(
   new PlaneGeometry(planeFactorX, planeFactorZ),
