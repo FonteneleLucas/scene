@@ -1,4 +1,3 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial, TextureLoader } from "three";
 import { scene } from "../scene/scene";
 import SimpleBlock from "./SimpleBlock";
 
