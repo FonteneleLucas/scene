@@ -37,23 +37,6 @@ class SimpleBlock {
     private defineTexture(){
         var path = "/assets/resources/"
         path+=`${this.textureType}.png`
-        // if (this.textureType === 1){
-        //     path+="block.png"
-        // }else if (this.textureType === 2) {
-        //     path+="grama.png"
-        // }else if (this.textureType === 3) {
-        //     path+="bamboo.png"
-        // }else if(this.textureType === 4) {
-        //     path+="brow.png"
-        // }else if(this.textureType === 5) {
-        //     path+="sapato.png"
-        // }else if(this.textureType === 6) {
-        //     path+="camisa.png"
-        // }else if(this.textureType === 7) {
-        //     path+="calca.png"
-        // }else{
-        //     path+="cloud.png"
-        // }
         
         const texture = new TextureLoader().load( path );
         return texture;
