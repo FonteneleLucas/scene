@@ -7,6 +7,7 @@ import {
   Color,
   SphereGeometry,
   MeshMatcapMaterial,
+  AmbientLight,
   TextureLoader,
   SpotLight,
 } from "three";
@@ -31,14 +32,10 @@ gui.addInput(axesHelper, "visible", {
   label: "AxesHelper",
 });
 
-// const ambientLight = new AmbientLight(0xffffff, 0.9)
-// scene.add(ambientLight)
+const ambientLight = new AmbientLight(0xffffff, 0.9)
+scene.add(ambientLight)
 
 scene.background = new TextureLoader().load("/assets/resources/sky.jpeg");
-
-// const light = new HemisphereLight( 0xffffbb, 0x080820, 1 );
-// scene.add( light );
-//Luz utilizada: https://threejs.org/docs/#api/en/lights/HemisphereLight
 
 const spotLight = new SpotLight(0xffffff, 10, 0);
 spotLight.position.set(0, 10, 0);
@@ -53,6 +50,7 @@ spotLight.shadow.camera.far = 4000;
 spotLight.shadow.camera.fov = 30;
 
 scene.add(spotLight);
+//Luz utilizada: https://threejs.org/docs/#api/en/lights/HemisphereLight
 
 //Renderiza o terreno do ambiente
 const z_axis = new SimpleBlock(-9, 0.5, -9, "grama", 1);
@@ -112,7 +110,6 @@ sphereCtrls.addInput(sphere.position, "z", {
 });
 
 
-// directionalLightCtrls.addInput(sphere.)
 
 sphereCtrls.addInput(PARAMS, "color").on("change", (e) => {
   sphere.material.color = new Color(e.value);
@@ -168,7 +165,7 @@ spotLightCtrls.addInput(paramsLight, "distance", {
 
 
 
-const plane = new Mesh(
+const plane = new Mesh( 
   new PlaneGeometry(planeFactorX, planeFactorZ),
   new MeshMatcapMaterial({
     //Tipo de material: https://threejs.org/docs/#api/en/materials/MeshMatcapMaterial
