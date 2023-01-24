@@ -1,17 +1,23 @@
 import {
   Scene,
   AxesHelper,
-  AmbientLight,
-  DirectionalLight,
   Mesh,
   SphereGeometry,
   MeshToonMaterial,
   PlaneGeometry,
   Color,
+  Raycaster,
+  Vector2,
+  Vector3,
 } from "three"
+
+import { light } from "/src/core/light"
+// import { raycaster } from "../core/ray_casting"
 import { renderer, updateRenderer } from "/src/core/renderer"
 
 import { gui } from "/src/core/gui"
+import camera from "../core/camera"
+import {raycaster, intersection} from "../core/ray_casting"
 
 export const scene = new Scene()
 
@@ -23,17 +29,12 @@ gui.addInput(axesHelper, "visible", {
   label: "AxesHelper",
 })
 
-const ambientLight = new AmbientLight(0xffffff, 0.5)
-scene.add(ambientLight)
 
-const directionalLight = new DirectionalLight("#ffffff", 2)
-directionalLight.castShadow = true
-directionalLight.shadow.mapSize.set(1024, 1024)
-directionalLight.shadow.camera.far = 500
-directionalLight.shadow.normalBias = 0.5
-directionalLight.position.set(0.25, 2, 2.25)
 
-scene.add(directionalLight)
+
+scene.add(light)
+intersection();
+
 
 const PARAMS = {
   color: "#5EDCAE",

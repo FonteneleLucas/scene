@@ -5,11 +5,13 @@ import "./core/controls"
 import { fpsGraph } from "./core/gui"
 import WebGL from "three/examples/jsm/capabilities/WebGL.js"
 import { scene, updateScene } from "./scene/scene"
+import camera_projection from "./core/camera_projection"
 
 function animate() {
   fpsGraph.begin()
   updateScene()
   renderer.render(scene, camera)
+  // renderer.render(scene, camera_projection)
   fpsGraph.end()
   requestAnimationFrame(animate)
 }

@@ -2,7 +2,7 @@ import { PerspectiveCamera } from "three"
 
 const VERTICAL_FIELD_OF_VIEW = 45
 const NEAR = 0.1
-const FAR = 100
+const FAR = 1000
 
 export const sizes = {
   width: window.innerWidth,
@@ -26,3 +26,5 @@ window.addEventListener("resize", () => {
 })
 
 export default camera
+
+// CONFIGURAR CAMERA
