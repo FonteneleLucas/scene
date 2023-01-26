@@ -11,6 +11,7 @@ import {
   Vector3,
   BoxGeometry,
   MeshBasicMaterial,
+  PCFSoftShadowMap,
 } from "three";
 
 import { light } from "/src/core/light";
@@ -51,6 +52,13 @@ const cubo = new Cubo();
 scene.add(cubo.get());
 const cilindro = new Cilindro();
 scene.add(cilindro.get());
+
+
+//Ativa as sombras para a cena
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = PCFSoftShadowMap;
+
+
 
 export function updateScene() {
   updateRenderer();

@@ -1,14 +1,22 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial } from "three";
+import { BoxGeometry, Color, Mesh, MeshBasicMaterial, MeshToonMaterial } from "three";
 class Cubo {
   public get() {
     //cubo
-    var cuboGeometria = new BoxGeometry(1, 1, 1);
 
-    var cuboMaterial = new MeshBasicMaterial({ color:'#5EDCAE' });
-    var cubo = new Mesh(cuboGeometria, cuboMaterial);
+    const cubo = new Mesh(
+        new BoxGeometry(1, 1, 1),
+        new MeshToonMaterial({
+          color: new Color("#5EDCAE"),
+          wireframe: false,
+        })
+      );
+      
     cubo.position.set(2, 2, 0);
-    return cubo
+    //Ativa as sombras para o cubo
+    cubo.castShadow = true;
+    cubo.receiveShadow = true;
+    return cubo;
   }
 }
 
-export default Cubo
+export default Cubo;

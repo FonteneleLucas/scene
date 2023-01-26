@@ -5,10 +5,11 @@ class Plano {
     const plane = new Mesh(
         new PlaneGeometry(10, 10, 10, 10),
         new MeshToonMaterial({
-          color: new Color("#444"),
+          color: new Color('#FFFFFF'),
         })
       );
       
+      plane.castShadow = true;
       plane.receiveShadow = true;
       plane.rotation.set(-Math.PI / 2, 0, 0);
     return plane
