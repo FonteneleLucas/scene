@@ -1,76 +1,72 @@
-// Get the canvas element
+// Inicialização da cena, câmera e renderizador
 const canvas = document.getElementById("render_canvas");
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
-// Create a renderer
-const renderer = new THREE.WebGLRenderer({ canvas });
+// Adiciona um cubo à cena
+var geometry = new THREE.BoxGeometry(1, 1, 1);
+var material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
 
-// Set the renderer size
-renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-renderer.setClearColor( 0xfffd3e, 0.6);
+// Posiciona a câmera
+camera.position.z = 5;
 
-// Create a scene
-const scene = new THREE.Scene();
+// Inicializa o Raycaster
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
 
-
-
-function rays(params) {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const pixels = new Uint8Array(width * height * 4);
-
-    const raycaster = new THREE.Raycaster();
-
-    for (let i = 0; i < width; i++) {
-        for (let j = 0; j < height; j++) {
-            // calculate the x, y and z values of the pixel
-            const x = (i / width) * 2 - 1;
-            const y = - (j / height) * 2 + 1;
-            const z = 0.5;
-            const vector = new THREE.Vector3(x, y, z);
-
-            // Unproject the pixel position
-            vector.unproject(getCamera());
-
-            // Set the origin and direction of the raycaster
-            raycaster.set(getCamera().position, vector.sub(getCamera().position).normalize());
-            
-            const intersects = raycaster.intersectObjects(scene.children);
-            // if(intersects.leght > 0){
-            console.log(intersects)
-            // }
-
-            // Find all the objects the ray intersects
-        }
+// Loop para percorrer o viewport
+function loop() {
+  for (var i = 0; i < window.innerWidth; i++) {
+    for (var j = 0; j < window.innerHeight; j++) {
+      // Define as coordenadas do pixel
+      mouse.x = (i / window.innerWidth) * 2 - 1;
+      mouse.y = -(j / window.innerHeight) * 2 + 1;
+      // Define a posição do raio baseado nas coordenadas do pixel e na configuração da câmera
+      raycaster.setFromCamera(mouse, camera);
+      console;
+      // Detecta quais objetos estão sendo atingidos pelo raio
+      var intersects = raycaster.intersectObjects(scene.children, true);
+      console.log(intersects);
+      // Faça algo com os objetos intersectados, por exemplo, mudar a cor deles
+      for (var k = 0; k < intersects.length; k++) {
+        intersects[k].object.material.color.set(0xff0000);
+      }
     }
+  }
+  requestAnimationFrame(loop);
 }
-
-
-
-
-
-
 
 // Render the scene
 function render(params) {
-    scene.add(directionalLight(), pointLight(), spotLight(), ambientLight());
-    scene.add(getCube());
-    renderer.render(scene, getCamera());
-    setTimeout(rays(), 5000);
+  var renderer = new THREE.WebGLRenderer({ canvas });
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  document.body.appendChild(renderer.domElement);
 
+  scene.add(directionalLight(), pointLight(), spotLight(), ambientLight());
+  // scene.add(getCube());/
+  renderer.render(scene, camera);
+  // Raycaster()
 }
-
 
 // Fix the aspect ratio of the camera when the canvas resizes
-window.addEventListener('resize', () => {
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    getCamera().aspect = canvas.clientWidth / canvas.clientHeight;
-    getCamera().updateProjectionMatrix();
-    render();
+window.addEventListener("resize", () => {
+  // renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  getCamera().aspect = canvas.clientWidth / canvas.clientHeight;
+  getCamera().updateProjectionMatrix();
+  render();
 });
 
-window.onload=function(){
-    var renderTrigger = document.getElementById("renderTrigger")
-    renderTrigger.addEventListener("click", render)
-}
-
-
+window.onload = function () {
+  var renderTrigger = document.getElementById("renderTrigger");
+  renderTrigger.addEventListener("click", () => {
+    render();
+    loop();
+  });
+};
