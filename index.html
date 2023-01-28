@@ -1,27 +1,58 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<script src="js/three.js" defer></script>
-		<script src="js/main.js" defer></script>
-        <script src="js/camera.js" defer></script>
-        <script src="js/cube.js" defer></script>
-		<script src="js/cylindre.js" defer></script>
-        <script src="js/lights.js" defer></script>
-		<script src="js/rayCaster.js" defer></script>
-		<script src="js/sphere.js" defer></script>
+
+<head>
+    <title>Phong Shading (Resolution)</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="mathfunctions.js"></script>
+    <link href="layout.css" rel="stylesheet">
+    <script type="text/javascript" src="objects.js"></script>
+    <script type="text/javascript" src="phong.js"></script>
+</head>
 
 
-        <div style="width: 100%;">
-            <canvas id="render_canvas" style="border: 1px solid #000;margin-left: auto;margin-right: auto;
-            display: block;" width="250" height="250"></canvas>
+<body>
+    <article id="tudo">
+        <div class="left">
+            <div class="playable-buttons">
+                <input id="save" type="button" value="Save" />
+                <button onclick="renderCanvas();">Render</button>
+            </div>
+            <div id="progress" class="hidden">
+                <div id="concluded"></div>
+            </div>
+            <textarea id="code" class="playable-code">
+sizeWindow(500,500);
+setProjection(45,0.1,1000)
+setCamera(_eye = new Vec3(15,15,15))
+
+s1 = new Shape('esfera',1);
+s1.setScale(3, 3, 3); 
+s1.setTranslate(-10, 0, -5);
+addObject(s1);  
+        
+s2 = new Shape('plano',2);
+    
+s2.setScale(3, 3, 3); 
+s2.setTranslate(0, 0, 0);
+addObject(s2); 
+            
+
+s3 = new Shape('cilindro',3);
+    
+s3.setScale(3, 3, 3); 
+s3.setTranslate(0, 0, -5);
+addObject(s3);  
+            </textarea>
         </div>
-        <input type="button" value="Render" id="renderTrigger"/>
-	</body>
+
+        <div class="main">
+            <canvas id="render-canvas" style="border: 1px solid #000;" width="500" height="500">
+        </div>
+    </article>
+    <script type="text/javascript" src="script.js"></script>
+
+    <!--a href="http://learningwebgl.com/blog/?p=1253">&lt;&lt; Back to Lesson 11</a><br /-->
+</body>
+
 </html>
