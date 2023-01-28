@@ -6,7 +6,6 @@ function getCylinder(params) {
     cylinder.position.x = -2
     cylinder.position.y = 6
     cylinder.position.z = -5 
-    cylinder.rotateZ.apply()
     return cylinder
 
 }

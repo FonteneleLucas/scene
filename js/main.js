@@ -9,6 +9,7 @@ var raycaster = null;
 function addObjects(params) {
   scene.add(getCube());
   scene.add(getCylinder());
+  scene.add(getSphere());
 }
 
 function init(params) {
@@ -64,6 +65,6 @@ window.onload = function () {
   renderTrigger.addEventListener("click", () => {
     init()
     render();
-    // loop();
+    loop();
   });
 };
