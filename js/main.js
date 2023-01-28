@@ -1,6 +1,9 @@
 // Inicialização da cena, câmera e renderizador
 const canvas = document.getElementById("render_canvas");
+var renderer = new THREE.WebGLRenderer({ canvas });
+
 var scene = new THREE.Scene();
+
 var camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -23,29 +26,40 @@ var mouse = new THREE.Vector2();
 
 // Loop para percorrer o viewport
 function loop() {
-  for (var i = 0; i < window.innerWidth; i++) {
-    for (var j = 0; j < window.innerHeight; j++) {
+  console.log("Inicializando");
+
+  for (var i = 0; i < canvas.clientWidth; i++) {
+    for (var j = 0; j < canvas.clientHeight; j++) {
       // Define as coordenadas do pixel
-      mouse.x = (i / window.innerWidth) * 2 - 1;
-      mouse.y = -(j / window.innerHeight) * 2 + 1;
+      mouse.x = (i / canvas.clientWidth) * 2 - 1;
+      mouse.y = -(j / canvas.clientHeight) * 2 + 1;
       // Define a posição do raio baseado nas coordenadas do pixel e na configuração da câmera
       raycaster.setFromCamera(mouse, camera);
-      console;
       // Detecta quais objetos estão sendo atingidos pelo raio
       var intersects = raycaster.intersectObjects(scene.children, true);
-      console.log(intersects);
+      // console.log(intersects);
+
       // Faça algo com os objetos intersectados, por exemplo, mudar a cor deles
       for (var k = 0; k < intersects.length; k++) {
-        intersects[k].object.material.color.set(0xff0000);
+        intersects[k].object.material.color.set(0x0000FF);
+        // console.log(intersects);
+        updateScene()
       }
     }
   }
-  requestAnimationFrame(loop);
+  console.log("Done");
+  
+
+  // requestAnimationFrame(loop);
+}
+
+function updateScene(params) {
+  renderer.render(scene, camera);
 }
 
 // Render the scene
 function render(params) {
-  var renderer = new THREE.WebGLRenderer({ canvas });
+  
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   document.body.appendChild(renderer.domElement);
 
@@ -58,8 +72,8 @@ function render(params) {
 // Fix the aspect ratio of the camera when the canvas resizes
 window.addEventListener("resize", () => {
   // renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  getCamera().aspect = canvas.clientWidth / canvas.clientHeight;
-  getCamera().updateProjectionMatrix();
+  // getCamera().aspect = canvas.clientWidth / canvas.clientHeight;
+  // getCamera().updateProjectionMatrix();
   render();
 });
 
