@@ -8,6 +8,7 @@ var raycaster = null;
 
 function addObjects(params) {
   scene.add(getCube());
+  scene.add(getSphere());
 }
 
 function init(params) {
@@ -37,7 +38,7 @@ function loop() {
       // console.log(intersects);
 
       for (var k = 0; k < intersects.length; k++) {
-        intersects[k].object.material.color.set(0x000FFD);
+        //intersects[k].object.material.color.set(0x000FFD);
         // console.log(intersects);
         updateScene()
       }
