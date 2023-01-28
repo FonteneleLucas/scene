@@ -4,6 +4,8 @@ var renderer = new THREE.WebGLRenderer({ canvas});
 var scene = new THREE.Scene();
 var camera = null;
 var raycaster = null;
+var intersects = []
+var min = 100000000
 
 
 function addObjects(params) {
@@ -31,24 +33,23 @@ function loop() {
 
       pixel.x = (i / canvas.clientWidth) * 2 - 1;
       pixel.y = -(j / canvas.clientHeight) * 2 + 1;
+
       // Verifica a posição do raio baseado nas coordenadas do pixel a partir da câmera
       raycaster.setFromCamera(pixel, camera);
 
       // Verifica intersecao
-      var intersects = raycaster.intersectObjects(scene.children, true);
+      intersects = raycaster.intersectObjects(scene.children, true);
       // console.log(intersects);
 
       for (var k = 0; k < intersects.length; k++) {
         intersects[k].object.material.color.set(0x000FFD);
+        setMinValue(intersects[k].distance)
         // console.log(intersects);
         updateScene()
       }
     }
   }
   console.log("Done");
-  
-
-  // requestAnimationFrame(loop);
 }
 
 function render(params) {
@@ -60,11 +61,20 @@ function updateScene(params) {
   renderer.render(scene, camera);
 }
 
+function setMinValue(value) {
+  if(value < min){
+    min = value;
+  }
+}
+
+
 window.onload = function () {
   var renderTrigger = document.getElementById("renderTrigger");
   renderTrigger.addEventListener("click", () => {
     init()
     render();
     loop();
+    console.log(min)
+    // findMinValue();
   });
 };
