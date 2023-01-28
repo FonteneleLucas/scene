@@ -17,7 +17,17 @@ var material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
+// Adiciona um cilindro à cena
+var cylinderGeometry = new THREE.CylinderGeometry( 1, 1, 2, 10 );
+var cylinderMaterial = new THREE.MeshStandardMaterial({color: 0xffff00});
+var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+cylinder.position.x = 6
+cylinder.position.z = -5 
+scene.add(cylinder);
+
 // Posiciona a câmera
+camera.position.y = 0;
+camera.position.x = 5;
 camera.position.z = 5;
 
 // Inicializa o Raycaster
