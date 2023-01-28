@@ -74,7 +74,7 @@ window.onload = function () {
     init()
     render();
     loop();
-    console.log(min)
+    console.log("menor dist: ", min)
     // findMinValue();
   });
 };
