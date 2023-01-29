@@ -1,0 +1,8 @@
+{
+  "name": "scene",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/FonteneleLucas/scene.git",
+  "author": "Davi Lima <davi.cruz@maida.health>",
+  "license": "MIT"
+}
