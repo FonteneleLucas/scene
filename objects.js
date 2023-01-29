@@ -75,6 +75,7 @@ Vec3.prototype.show = function() {
 var sphere = 1;
 var plane = 2;
 var cylinder =3;
+var cube = 4;
 
 function Camera(eye, at, up) {
     this.eye = eye;
@@ -136,6 +137,7 @@ function Shape(name, type_shape = sphere) {
     this.scale = new Vec3(0, 0, 0);
     this.rotate = new Vec3(0, 0, 0);
     this.shine = 0.0;
+    // this.color = 
 }
 
 
@@ -244,6 +246,31 @@ Shape.prototype.getDataIntersection = function(ray_w, normal, point) {
     return [true, point, normal, t_];
 }
 
+
+Shape.prototype.testCubeIntersection = function(ray) {
+    const Vec = new Vec3();
+    const planes = [
+    {n_plane: new Vec3(0, 1, 0), q_plane: new Vec3(0, 0.5, 0)},
+    {n_plane: new Vec3(0, -1, 0), q_plane: new Vec3(0, -0.5, 0)},
+    {n_plane: new Vec3(-1, 0, 0), q_plane: new Vec3(-0.5, 0, 0)},
+    {n_plane: new Vec3(1, 0, 0), q_plane: new Vec3(0.5, 0, 0)},
+    {n_plane: new Vec3(0, 0, -1), q_plane: new Vec3(0, 0, -0.5)},
+    {n_plane: new Vec3(0, 0, 1), q_plane: new Vec3(0, 0, 0.5)}
+    ];
+    for (const {n_plane, q_plane} of planes) {
+        const denominador = Vec.dot(n_plane, ray.d);
+        if (denominador === 0) continue;
+        const t = Vec.dot(n_plane, Vec.minus(q_plane, ray.o)) / denominador;
+        const point = ray.get(t);
+        if (
+            (point.x >= -0.5 && point.x <= 0.5) && 
+            (point.y >= -0.5 && point.y <= 0.5) && 
+            (point.z >= -0.5 && point.z <= 0.5)
+        ) return {t, n_plane};
+    }
+    
+    return {t:undefined};
+}
 Shape.prototype.testIntersectionRay = function(ray) {
     //salvando raio em coordenadas do mundo para calcular o parâmetro t
     var ray_w = ray;
@@ -294,5 +321,14 @@ Shape.prototype.testIntersectionRay = function(ray) {
          }
         
         }
+        else if (this.geometry === cube) {
+            const {t, n_plane} = this.testCubeIntersection(ray)
+            if (t !== undefined) {
+                const point = ray.get(t);
+                return this.getDataIntersection(ray_w, n_plane, point)
+            }
+        }
+        
+        
     return [false, null];
 }
