@@ -128,6 +128,7 @@ function Shape(type_shape = sphere) {
     this.translate = new Vec3(0, 0, 0);
     this.scale = new Vec3(0, 0, 0);
     this.rotate = new Vec3(0, 0, 0);
+    this.color = 0x93C47D
 }
 
 function Shape(name, type_shape = sphere) {
@@ -137,7 +138,7 @@ function Shape(name, type_shape = sphere) {
     this.scale = new Vec3(0, 0, 0);
     this.rotate = new Vec3(0, 0, 0);
     this.shine = 0.0;
-    // this.color = 
+    this.color = 0x93C47D
 }
 
 
@@ -160,6 +161,10 @@ Shape.prototype.setRotateY = function(angle) {
 
 Shape.prototype.setRotateZ = function(angle) {
     this.rotate.z = angle;
+}
+
+Shape.prototype.setColor= function(value) {
+    this.color = value
 }
 
 Shape.prototype.transformMatrix = function() {
