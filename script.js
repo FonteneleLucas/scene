@@ -9,7 +9,7 @@ var far = 1000.;
 var angle = 45;
 var stop = false;
 var objects = [];
-var background = new Vec3(0 / 255., 0 / 255., 0 / 255.);
+var background = new Vec3(180,180,180);
 
 const get = e => document.querySelector(e); //obtém um elemento
 
@@ -74,36 +74,57 @@ textarea.addEventListener("input", updateScene());
 async function calculateIntersection(ray, i, j) {
     var intercept = false;
     for (var k = 0; k < objects.length; k++) {
-        var shape = objects[k];
-        //raio transformado em coordenadas do mundo
-        var ray_w = new Ray(multVec4(camera.lookAt(), ray.o), multVec4(camera.lookAt(), ray.d));
-        var result = shape.testIntersectionRay(ray_w);
-        //TODO: verificar onde ocorreu a menor interseção
-        if (result[0]) {
-            intercept = true;
-            var position = result[1];
-            var normal = result[2];
-            var viewer = camera.eye;
-            //TODO: fazer o cálculo de phong e setar na variável colorF
-            // var colorF = new Vec3(228 / 255., 44 / 255., 100 / 255.);
-            colorF = phongColor(position, normal, viewer);
-
-            ctx.fillStyle = "rgb(" + Math.min(colorF.x, 1) * 255 + "," + Math.min(colorF.y, 1) * 255 + "," + Math.min(colorF.z, 1) * 255 + ")";
-            ctx.fillRect(i, j, 1, 1);
-
+      var shape = objects[k];
+      //ray transformed into world coordinates
+      var ray_w = new Ray(multVec4(camera.lookAt(), ray.o), multVec4(camera.lookAt(), ray.d));
+      var result = shape.testIntersectionRay(ray_w);
+      //TODO: check where the smallest intersection occurred
+      if (result[0]) {
+        intercept = true;
+        var position = result[1];
+        var normal = result[2];
+        var viewer = camera.eye;
+  
+        // Check if point is in shadow
+        light_position = new Vec3(10, 10, 0);
+        var light_direction = normalizeMatrix(subtractVectors(light_position, position));
+        console.log(light_direction)
+        var shadow_ray = new Ray(position, light_direction);
+        var in_shadow = false;
+        for (var m = 0; m < objects.length; m++) {
+          var shadow_result = objects[m].testIntersectionRay(shadow_ray);
+          if (shadow_result[0] && distanceBetweenVectors(shadow_result[1], position) < 1e-6) {
+            console.log("Entrou");
+            in_shadow = true;
+            break;
+          }
         }
-    }
-
-
-    if (!intercept) {
-        ctx.fillStyle = `rgb(${background.x},${background.y},${background.z})`;
+  
+        // Calculate Phong shading
+        if (in_shadow) {
+          // Apply shadow color
+        //   colorF = shadowColor;
+          ctx.fillStyle = "rgb(50,50,50)";
+        } else {
+          // Apply Phong shading
+          colorF = phongColor(position, normal, viewer);
+          ctx.fillStyle = "rgb(" + Math.min(colorF.x, 1) * 255 + "," + Math.min(colorF.y, 1) * 255 + "," + Math.min(colorF.z, 1) * 255 + ")";
+        }
         ctx.fillRect(i, j, 1, 1);
+  
+  
+      }
+    }
+  
+    if (!intercept) {
+      ctx.fillStyle = `rgb(${background.x},${background.y},${background.z})`;
+      ctx.fillRect(i, j, 1, 1);
     }
 
 
 
 }
-
+  
 
 
 async function renderCanvas() {

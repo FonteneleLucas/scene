@@ -24,11 +24,11 @@
             <textarea id="code" class="playable-code">
 sizeWindow(500,500);
 setProjection(45,0.1,1000)
-setCamera(_eye = new Vec3(15,15,15))
+setCamera(_eye = new Vec3(15,15,0))
 
 s1 = new Shape('esfera',1);
 s1.setScale(3, 3, 3); 
-s1.setTranslate(-10, 0, -5);
+s1.setTranslate(-10, 0, 0);
 addObject(s1);  
         
 s2 = new Shape('plano',2);
@@ -47,9 +47,9 @@ addObject(s3);
 s4 = new Shape('cube',4);
     
 s4.setScale(3, 3, 3); 
-s4.setTranslate(-20, 0, -5);
+s4.setTranslate(0, 0, 6);
 addObject(s4); 
-              
+                                            
             </textarea>
         </div>
 

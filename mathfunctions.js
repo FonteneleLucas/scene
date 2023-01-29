@@ -54,6 +54,24 @@ function translateMatrixI(tx, ty, tz) {
     ]; //retorna matriz 4x4
 }
 
+function normalizeMatrix(matrix) {
+    let matrixSum = 0;
+    
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = 0; j < matrix[i].length; j++) {
+        matrixSum += matrix[i][j];
+      }
+    }
+    
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = 0; j < matrix[i].length; j++) {
+        matrix[i][j] = matrix[i][j] / matrixSum;
+      }
+    }
+    
+    return matrix;
+  }
+
 //TODO: definir matriz de rotação no eixo x passando um angulo em graus com retorno: 4x4
 function rotateMatrixX(theta) {
     var theta = (theta * Math.PI) / 180.;
@@ -153,4 +171,20 @@ function transformToSystem(Width, Height) {
         [0, 0, 1, 0],
         [0, 0, 0, 1]
     ];
+}
+
+function subtractVectors(vector1, vector2) {
+    return {
+      x: vector1.x - vector2.x,
+      y: vector1.y - vector2.y,
+      z: vector1.z - vector2.z,
+      w: 1
+    };
+  }
+
+function distanceBetweenVectors(vector1, vector2) {
+    var xDiff = vector1.x - vector2.x;
+    var yDiff = vector1.y - vector2.y;
+    var zDiff = vector1.z - vector2.z;
+    return Math.sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 }
